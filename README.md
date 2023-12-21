@@ -48,10 +48,10 @@ This function will return 2 lists:
 - **read()**
 
 ```python
-    data = bd.read(PATH + file)
+    data = bd.read(file)
 ```
 
-This function will receive a PATH + filename and will return a dictionary of your data.
+This function will receive a filename and will return a dictionary of your data.
 
 - **filter()**
 
@@ -67,3 +67,13 @@ This function takes a dictionary (usually the **read** function dictionary) and 
 in_breached_data = bd.search(filtered_data,username=USERNAME,email=EMAIL)
 ```
 This function takes a dictionary (typically you want to send the dictionary from the **filter** function) and you will pass the `username` and `email` of your target, returning a boolean indicating whether or not it is in the leaked data.
+
+- **scan()**
+
+```python
+bd.scan(username=USERNAME,email=EMAIL)
+```
+
+This function takes the target's name and email as input and returns a list of dictionaries that indicate which site the target's data was leaked from and whether or not the target's data was leaked.
+
+

@@ -1,6 +1,6 @@
 import re
 import os
-from typing import List
+from typing import List, Dict
 
 import pandas as pd
 
@@ -13,7 +13,7 @@ class BreachedData:
     def __init__(self, directory_path):
         self.directory_path = directory_path
 
-    def filter(self,dict_data:list):
+    def filter(self,dict_data:list)-> Dict:
         new_dict_data = list()
 
         for i in dict_data:
@@ -25,7 +25,7 @@ class BreachedData:
 
         return new_dict_data
     
-    def search(self,dict_data:list,username:str,email:str):
+    def search(self,dict_data:list,username:str=None,email:str=None) -> bool:
         for i in dict_data:
             if i['username'] == username or i['email'] == email:
                 return True
@@ -68,9 +68,39 @@ class BreachedData:
             raise ValueError(f"Unsupported file type: {file_extension}")
 
 
-    def read(self,filepath:str):
-        self.file = self._get_file_handler(filepath)
+    def read(self,file:str) -> Dict:
+        self.file = self._get_file_handler(self.directory_path + file)
         return self.file.read()
 
+
+    def scan(self,username=None,email=None)-> list:
+        files,file_list = self.get_files_list()
+
+        list_websites = list()
+
+        for file in files:
+            data = self.read(file)
+            filtered_data = self.filter(data)
+
+            in_breached_data = self.search(filtered_data,username,email)
+
+            try:
+                if in_breached_data:
+                    for f in file_list:
+                        if file in f.keys():
+                            new_dict = dict()
+                            new_dict[f[file]] = True
+                            list_websites.append(new_dict)
+                elif not in_breached_data:
+                    for f in file_list:
+                        if file in f.keys():
+                            new_dict = dict()
+                            new_dict[f[file]] = False
+                            list_websites.append(new_dict)
+
+            except Exception as e:
+                print(e)
+
+        return list_websites
 
         
