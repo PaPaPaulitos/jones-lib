@@ -76,4 +76,14 @@ bd.scan(username=USERNAME,email=EMAIL)
 
 This function takes the target's name and email as input and returns a list of dictionaries that indicate which site the target's data was leaked from and whether or not the target's data was leaked.
 
+## Example
 
+```python
+from jones_lib import BreachedData
+
+PATH = './files/'
+
+bd = BreachedData(PATH)
+
+print(bd.scan(username='paulitos'))  
+```
