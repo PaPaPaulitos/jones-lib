@@ -1,7 +1,7 @@
 from typing import Dict, Any
 import csv
 
-from interfaces import IFile
+from ..interfaces import IFile
 
 class FileCSV(IFile):
     def __init__(self, file):

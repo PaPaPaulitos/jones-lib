@@ -1,4 +1,4 @@
-from controllers import BreachedData
+from jones_lib import BreachedData
 
 PATH = './files/'
 

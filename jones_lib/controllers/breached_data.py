@@ -4,10 +4,10 @@ from typing import List
 
 import pandas as pd
 
-from interfaces.ifile import IFile
-from models.file_csv import FileCSV
-from models.file_xlsx import FileXLSX
-from models.file_json import FileJSON
+from ..interfaces.ifile import IFile
+from ..models.file_csv import FileCSV
+from ..models.file_xlsx import FileXLSX
+from ..models.file_json import FileJSON
 
 class BreachedData:
     def __init__(self, directory_path):

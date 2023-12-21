@@ -1,5 +1,5 @@
 import json
-from interfaces import IFile
+from ..interfaces import IFile
 from typing import Dict, Any
 
 class FileJSON(IFile):

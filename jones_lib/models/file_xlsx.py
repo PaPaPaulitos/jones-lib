@@ -1,5 +1,5 @@
 from typing import Dict, Any
-from interfaces import IFile
+from ..interfaces import IFile
 import openpyxl
 
 class FileXLSX(IFile):
