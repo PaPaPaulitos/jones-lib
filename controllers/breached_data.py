@@ -1,3 +1,4 @@
+import re
 import os
 from typing import List
 
@@ -32,11 +33,24 @@ class BreachedData:
     
     def get_files_list(self) -> List[str]:
         try:
+            files_list = list()
             entries = os.listdir(self.directory_path)
             files = [entry for entry in entries if os.path.isfile(os.path.join(self.directory_path, entry))]
-            return files
+            for filename in files:
+                new_dict = dict()
+
+                match = re.match(r'(.+?)\.', filename)
+                if match:
+                    website_name = match.group(1)
+                    new_dict[filename] = website_name
+                    files_list.append(new_dict)
+                else:
+                    raise ValueError(f"Invalid filename: {filename}")
+            
+            return files,files_list
+
         except FileNotFoundError:
-            print(f"O diretório {self.directory_path} não foi encontrado.")
+            print(f"PATH {self.directory_path} not found")
             return []
         except Exception as e:
             print(f"Ocorreu um erro: {e}")
