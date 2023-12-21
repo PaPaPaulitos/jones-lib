@@ -9,4 +9,7 @@ filter_breached_data = FilterBreachedData()
 
 filtered_data = filter_breached_data.filter_breached_data(data)
 
-print(filtered_data)
+in_breached_data = filter_breached_data.search_in_filter_data(filtered_data,'paulitos','pauloricardomrs2002@gmail.com')
+
+if in_breached_data:
+    print('Your data was breached')
