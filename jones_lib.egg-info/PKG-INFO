@@ -1,0 +1,99 @@
+Metadata-Version: 2.1
+Name: jones-lib
+Version: 0.0.1
+Summary: Explore Breached Data
+Author: Paulo Ricardo Mesquita
+Author-email: pauloricardomrs2002@gmail.com
+License: MIT License
+Keywords: jones,stalking,jones lib,jones-lib
+Description-Content-Type: text/markdown
+
+<p align=center>
+  <br>
+  <img width="70%" height="70%" src="./Images/Jones-lib.svg">
+  <br>
+  <span>Explore breached data</span>
+  <br>
+</p>
+
+## Installation
+
+```bash
+# Installing using pip
+$ pip install jones-lib
+```
+
+## Usage
+
+- Import `BreachedData` object
+
+```python
+from jones_lib import BreachedData
+```
+
+- When you instantiate a `BreachedData` object, you need to pass a `PATH` to your breached data.
+
+```python
+PATH = './files/'
+
+bd = BreachedData(PATH)
+```
+
+### Jones functions
+
+- **get_files_list()**
+
+```python
+    files,file_list = bd.get_files_list()
+```
+
+This function will return 2 lists:
+
+- files: Filenames in the PATH
+
+- file_list: A list of dictionaries where the key is the filename and the value is the name of the website.
+
+<br>
+
+- **read()**
+
+```python
+    data = bd.read(file)
+```
+
+This function will receive a filename and will return a dictionary of your data.
+
+- **filter()**
+
+```python
+    filtered_data = bd.filter(data)
+```
+
+This function takes a dictionary (usually the **read** function dictionary) and filters it so that it only has the `username` and `email` fields.
+
+- **search()**
+
+```python
+in_breached_data = bd.search(filtered_data,username=USERNAME,email=EMAIL)
+```
+This function takes a dictionary (typically you want to send the dictionary from the **filter** function) and you will pass the `username` and `email` of your target, returning a boolean indicating whether or not it is in the leaked data.
+
+- **scan()**
+
+```python
+bd.scan(username=USERNAME,email=EMAIL)
+```
+
+This function takes the target's name and email as input and returns a list of dictionaries that indicate which site the target's data was leaked from and whether or not the target's data was leaked.
+
+## Example
+
+```python
+from jones_lib import BreachedData
+
+PATH = './files/'
+
+bd = BreachedData(PATH)
+
+print(bd.scan(username='paulitos'))  
+```
