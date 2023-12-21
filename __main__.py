@@ -1,15 +1,22 @@
-from controllers import ReadFile, DirectoryScanner, FilterBreachedData
+from controllers import BreachedData
+
+PATH = './files/'
+
+bd = BreachedData(PATH)
+
+file_list = bd.get_files_list()
+
+print(file_list)
+
+for file in file_list:
+    data = bd.read(PATH + file)
+    filtered_data = bd.filter(data)
+
+    in_breached_data = bd.search(filtered_data,'paulitos','pauloricardomrs2002@gmail.com')
+
+    if in_breached_data:
+        print('Your data was breached')
 
 
 
-read_file = ReadFile('./files/fake_data.csv')
-data = read_file.read()
 
-filter_breached_data = FilterBreachedData()
-
-filtered_data = filter_breached_data.filter_breached_data(data)
-
-in_breached_data = filter_breached_data.search_in_filter_data(filtered_data,'paulitos','pauloricardomrs2002@gmail.com')
-
-if in_breached_data:
-    print('Your data was breached')
